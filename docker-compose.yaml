@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  ui:
+    image: lahiru98s/sshweb:3.0
+    # build:
+    #      Dockerfile: ./Dockerfile
+    ports:
+      - 8080:80
+          
+
+  db:
+    image: mariadb:10.6
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: lahiru1998
+      MYSQL_DATABASE: vpn
+    volumes:
+       - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8090:80
+    environment:
+      - PMA_ARBITRARY=1
